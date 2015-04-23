@@ -1,0 +1,40 @@
+<!doctype html>
+
+<!-- Nathan Samano
+  CMP237 Ch. 13 The Cat's Hat -->
+
+<html>
+
+<img src="img/cat.png" id="cat" style="position: absolute">
+<img src="img/hat.png" id="hat" style="position: absolute">
+
+<script>
+  var cat = document.querySelector("#cat");
+  var hat = document.querySelector("#hat");
+  
+  // copied from book code
+  var angle = 0, lastTime = null;
+  function animate(time) {
+    if (lastTime != null)
+      angle += (time - lastTime) * 0.001;
+    lastTime = time;
+    
+    // for cat, added 200 to fit more in center
+    cat.style.top = (Math.sin(angle) * 20 + 200) + "px";
+    // added 400 to fit more in center
+    cat.style.left = (Math.cos(angle) * 200 + 400) + "px";
+    
+    // do same for hat but start on other side of ellipse
+    // got idea of hatAngle from answer but added negative to angle
+    // so now the hat animates in opposite direction as cat
+    var hatAngle = -angle + Math.PI;
+    // use same numbers for pixels as cat so hat animates around same ellipse
+    hat.style.top = (Math.sin(hatAngle) * 20 + 200) + "px";
+    hat.style.left = (Math.cos(hatAngle) * 200 + 400) + "px";
+    
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+</script>
+
+</html>
